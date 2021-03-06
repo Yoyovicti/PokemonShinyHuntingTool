@@ -24,3 +24,6 @@ hs_err_pid*
 
 # Class diagram
 *.mdj
+
+# Test classes
+/src/*/tests
