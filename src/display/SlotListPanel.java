@@ -1,5 +1,8 @@
 package display;
 
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.ArrayList;
@@ -16,19 +19,53 @@ import file.PSHZoneFileReader;
 
 public class SlotListPanel extends JPanel {
 	
+	private GeneralSlotPanel parentGeneralSlotPanel;
+	
 	private List<SlotPanel> slotPanelList;
 	
-	public SlotListPanel() {
+	public SlotListPanel(GeneralSlotPanel parent) {
 		super();
-		this.slotPanelList = new ArrayList<SlotPanel>();
-		
+		this.parentGeneralSlotPanel = parent;
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
-		for(int i = 0; i < 12; i++) {
-			SlotPanel slotPanel = new SlotPanel();
+		loadSlotPanelList();
+	}
+
+	public Slot getSlot(int index) {
+		return parentGeneralSlotPanel.getSlot(index);
+	}
+
+	public void update() {
+		this.removeAll();
+		loadSlotPanelList();
+	}
+
+	protected void loadSlotPanelList() {
+		this.slotPanelList = new ArrayList<SlotPanel>();
+		loadTitlePanel();
+
+		for (int i = 0; i < 12; i++) {
+			SlotPanel slotPanel = new SlotPanel(this, i);
 			slotPanelList.add(slotPanel);
 			this.add(slotPanel);
 		}
+	}
+
+	private void loadTitlePanel() {
+		JPanel titlePanel = new JPanel();
+		
+		JLabel pokemonTitle = new JLabel("Pokémon",JLabel.CENTER);
+		pokemonTitle.setPreferredSize(new Dimension(100, 40));
+		JLabel formTitle = new JLabel("Forme",JLabel.CENTER);
+		formTitle.setPreferredSize(new Dimension(100, 40));
+		JLabel levelTitle = new JLabel("Niveau",JLabel.CENTER);
+		levelTitle.setPreferredSize(new Dimension(100, 40));
+		
+		titlePanel.add(pokemonTitle);
+		titlePanel.add(formTitle);
+		titlePanel.add(levelTitle);
+		
+		this.add(titlePanel);
 	}
 	
 	/*

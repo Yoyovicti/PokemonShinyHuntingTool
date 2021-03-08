@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import data.Game;
+import data.Slot;
 import data.Zone;
 
 public class GeneralSlotPanel extends JPanel implements ActionListener{
@@ -28,7 +29,7 @@ public class GeneralSlotPanel extends JPanel implements ActionListener{
 		
 		JPanel comboBoxPanel = loadComboBoxPanel();
 		
-		this.slotListPanel = new SlotListPanel();
+		this.slotListPanel = new SlotListPanel(this);
 		
 		this.add(comboBoxPanel);
 		this.add(slotListPanel);
@@ -45,6 +46,7 @@ public class GeneralSlotPanel extends JPanel implements ActionListener{
 		gameOption.addActionListener(this);
 		
 		loadRouteOption();
+		routeOption.addActionListener(this);
 		
 		comboBoxPanel.add(gameOption);
 		comboBoxPanel.add(routeOption);
@@ -65,13 +67,28 @@ public class GeneralSlotPanel extends JPanel implements ActionListener{
 	}
 	
 	@Override
-	public void actionPerformed(ActionEvent e) {
-		updateRouteOption();
+	public void actionPerformed(ActionEvent event) {
+		if(event.getSource() == gameOption)
+			updateRouteOption();
+		if(event.getSource() == routeOption)
+			slotListPanel.update();
+		
 	}
 
 	protected void updateRouteOption() {
 		routeOption.removeAllItems();
 		loadRouteOption();
+	}
+
+	public Slot getSlot(int index) {
+		try {
+			Zone currentZoneStr = (Zone) routeOption.getSelectedItem();
+	 		return currentZoneStr.getSlot(index);
+	 	} 
+		catch(NullPointerException e) {
+	 		System.err.println("Warning : the current zone is null");
+	 	}
+	 	return null;
 	}
 
 	

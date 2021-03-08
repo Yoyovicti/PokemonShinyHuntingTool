@@ -11,6 +11,9 @@ import file.PSHGameListFileReader;
 
 public class Game{
 	
+	public static final Object ZONE_PARAM = "Zones";
+	public static final Object PERCENTAGE_PARAM = "Slots";
+	
 	private Name name;
 	private List<Percentage> percentageList;
 	private List<Zone> zoneList;
@@ -38,25 +41,12 @@ public class Game{
 		return zoneList;
 	}
 
-	public void addData(String param, String line) {
-		switch(param) {
-			case "Zones":
-				this.addZone(line);
-				break;
-			case "Slots":
-				this.addPercentage(line);
-				break;
-		}
+	public void addZone(Zone zone) {
+		zoneList.add(zone);
 	}
 
-	private void addZone(String line) {
-		Zone z = new Zone(line);
-		zoneList.add(z);
-	}
-
-	private void addPercentage(String line) {
-		Percentage p = new Percentage(line);
-		percentageList.add(p);
+	public void addPercentage(Percentage percentage) {
+		percentageList.add(percentage);
 	}
 
 	@Override

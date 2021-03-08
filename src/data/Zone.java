@@ -1,20 +1,25 @@
 package data;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Zone{
-	
-	private Game parentGame;
 	
 	private Name name;
 	private List<Slot> slotList;
 	
 	public Zone(String name) {
 		this.name = new Name(name);
+		slotList = new ArrayList<Slot>();
+	}
+
+	public Slot getSlot(int index) {
+		if(index < slotList.size())
+			return slotList.get(index);
+		return null;
+	}
+
+	public void addSlot(Slot slot) {
+		slotList.add(slot);
 	}
 
 	@Override

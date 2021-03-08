@@ -4,10 +4,16 @@ import java.util.ArrayList;
 public class Pokemon {
 	
 	private Name name;
-	private Form form;
-	
 	private int dexNum;
-	private int level;
+	
+	public Pokemon(String name) {
+		this.name = new Name(name);
+	}
+	
+	@Override
+	public String toString() {
+		return name.toString();
+	}
 	
 	/*
 	String name;
