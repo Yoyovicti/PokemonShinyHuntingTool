@@ -7,12 +7,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Slot {
-	
 	private Zone parentZone;
 	
 	private Pokemon pokemon;
+	private Form form;
+	private int level;
+
+	public Slot(String[] slotTab) {
+		try {
+			pokemon = new Pokemon(slotTab[0]);
+			form = new Form(slotTab[1]);
+			level = Integer.parseInt(slotTab[2]);
+		} catch (Exception e) {
+			System.err.println("Error : could not create Slot because there are not 3 parameters");
+		}
+	}
+
+	public Pokemon getPokemon() {
+		return pokemon;
+	}
 	
-	private int index;
+	public Form getForm() {
+		return form;
+	}
+	
+	public int getLevel() {
+		return level;
+	}
 	
 	/*
 	Zone zone;
