@@ -38,6 +38,7 @@ public class SlotListPanel extends JPanel {
 	public void update() {
 		this.removeAll();
 		loadSlotPanelList();
+		this.updateUI();
 	}
 
 	protected void loadSlotPanelList() {
