@@ -29,3 +29,4 @@ Minor updates :
 - Removing the Form column when no Pokemon of the zone have one.
 - Adding Percentage column to the left to know the percentage corresponding to each slot.
 - Adding the global percentage of each Pokemon in the selected zone.
+- Creating a complete Javadoc.
