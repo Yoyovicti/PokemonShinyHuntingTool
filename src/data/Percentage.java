@@ -5,15 +5,11 @@ public class Percentage {
 	
 	public Percentage(String number) {
 		this.number = Integer.parseInt(number);
+		System.out.println(this);
 	}
 
-	
-//	
-//	public Percentage(int number) {
-//		this.number = number;
-//	}
-//
-//	public int getNumber() {
-//		return number;
-//	}
+	@Override
+	public String toString() {
+		return Integer.toString(number) + " %";
+	}
 }

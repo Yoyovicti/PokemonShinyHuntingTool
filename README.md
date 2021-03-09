@@ -26,7 +26,6 @@ Major updates :
 - Adding the possibility to select elements such as repel, time of day, abilities, etc. and calculate the effects on global percentages, conservation rate, etc.
 
 Minor updates :
-- Removing the Form column when no Pokemon of the zone have one.
-- Adding Percentage column to the left to know the percentage corresponding to each slot.
+- Known bug : wrong display when a Pokemon has a form
 - Adding the global percentage of each Pokemon in the selected zone.
 - Creating a complete Javadoc.
