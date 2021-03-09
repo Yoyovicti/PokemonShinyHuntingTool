@@ -10,7 +10,7 @@ public class Main {
 	 * @param args (unused)
 	 */
 	public static void main(String[] args) {
-		String version = "0.0.3";
+		String version = "0.0.4";
 		
 		new GeneralWindow(version);
 	}
