@@ -22,8 +22,6 @@ public class GeneralTabbedPane extends JTabbedPane{
 		
 		initPanels();
 		addTabs();
-		
-		
 	}
 
 	protected void initTabbedPane() {
@@ -50,50 +48,4 @@ public class GeneralTabbedPane extends JTabbedPane{
 	public List<Game> getGameList() {
 		return this.gameList;
 	}
-	
-	/*
-	// Data link
-	List<Game> gameList;
-	
-	// Panels for each application
-	JPanel slotPan;
-	JPanel dexPan;
-	JPanel counterPan;
-	JPanel otherPan;
-	
-	public GeneralTabbedPane() {
-		super();
-		gameList = Game.readGames();
-		Font f = new Font("Verdana", Font.PLAIN, 15);
-		this.setFont(f);
-		
-		initPanels();
-	}
-	
-	private void initPanels() {
-		initPrincipalSlotsPanel();
-		initDexPan();
-		initCounterPan();
-		initOtherPan();
-	}
-
-	protected void initPrincipalSlotsPanel() {
-		slotPan = new GeneralSlotsPanel();
-		this.addTab("Encounter slots", slotPan);
-	}
-
-	protected void initDexPan() {
-		dexPan = new JPanel();
-		this.addTab("Pokédex", dexPan);
-	}
-	
-	protected void initCounterPan() {
-		counterPan = new JPanel();
-		this.addTab("Counter", counterPan);
-	}
-	
-	protected void initOtherPan() {
-		otherPan = new JPanel();
-		this.addTab("Other...", otherPan);
-	}*/
 }

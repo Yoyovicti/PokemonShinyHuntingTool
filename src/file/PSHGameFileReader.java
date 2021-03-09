@@ -22,22 +22,27 @@ public class PSHGameFileReader extends PSHFileReaderParam{
 		this.fileName = fileName;
 		this.game = new Game(fileName); 
 		
-		readLines();
+		readLines(Game.PERCENTAGE_PARAM);
+		readLines(Game.ZONE_PARAM);
 	}
 
-	private void readLines() {
+	private void readLines(String param) {
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(fileName));
 			
 			String line;
-			String param = "";
+			boolean add = false;
 
 			while ((line = reader.readLine()) != null) {
-				if(isParam(line)) {
-					param = getParam(line);
-				}
-				else if (param != ""){
+				if(add && !isParam(line))
 					addToParam(param, line);
+				if(isParam(line)) {
+					if(line.equals("# " + param)) {
+						add = true;
+					}
+					else {
+						add = false;
+					}
 				}
 			}
 			
@@ -58,7 +63,7 @@ public class PSHGameFileReader extends PSHFileReaderParam{
 
 	private void addToParam(String param, String line) {
 		if(param.equals(Game.ZONE_PARAM)){
-			zoneFileReader = new PSHZoneFileReader(line);
+			zoneFileReader = new PSHZoneFileReader(this, line);
 			Zone zone = zoneFileReader.getZone();
 			
 			game.addZone(zone);
@@ -71,28 +76,4 @@ public class PSHGameFileReader extends PSHFileReaderParam{
 	public Game getGame() {
 		return game;
 	}
-
-	
-	
-	/*
-	public final static String zoneParam = "Zones";
-	public final static String slotParam = "Slots";
-	private List<String> zoneLines;
-	
-	public PSHGameFileReader(String fileName) {
-		super(fileName);
-		this.setParameter(zoneParam, slotParam);
-		
-	}
-	
-	@Override
-	protected List<Object> readSubList(String param) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public List<String> getZoneLines() {
-		return this.zoneLines;
-	}
-	*/
 }

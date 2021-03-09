@@ -7,6 +7,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import data.Form;
+import data.Percentage;
 import data.Pokemon;
 import data.Slot;
 
@@ -17,9 +18,10 @@ public class SlotPanel extends JPanel{
 	private JLabel pokemonLabel;
 	private JLabel formLabel;
 	private JLabel levelLabel;
+	private JLabel percLabel;
 	
 	private Slot slot;
-	
+
 	public SlotPanel(SlotListPanel parent, int index) {
 		super();
 		this.parentSlotPanel = parent;
@@ -27,6 +29,9 @@ public class SlotPanel extends JPanel{
 		this.slot = parentSlotPanel.getSlot(index);
 		
 		if(slot != null) {
+			Percentage percentage = slot.getPercentage();
+			percLabel = new JLabel(percentage.toString(), JLabel.CENTER);
+			
 			Pokemon pokemon = slot.getPokemon();
 			pokemonLabel = new JLabel(pokemon.toString(),JLabel.CENTER);
 			
@@ -37,28 +42,31 @@ public class SlotPanel extends JPanel{
 			levelLabel = new JLabel(Integer.toString(level),JLabel.CENTER);
 		}
 		else {
+			percLabel = new JLabel("null", JLabel.CENTER);
 			pokemonLabel = new JLabel("null",JLabel.CENTER);
 			formLabel = new JLabel("null",JLabel.CENTER);
 			levelLabel = new JLabel("null",JLabel.CENTER);
 		}
 		
+		percLabel.setPreferredSize(new Dimension(100, 40));
 		pokemonLabel.setPreferredSize(new Dimension(100, 40));
 		formLabel.setPreferredSize(new Dimension(100, 40));
 		levelLabel.setPreferredSize(new Dimension(100, 40));
 		
+		this.add(percLabel);
 		this.add(pokemonLabel);
-		this.add(formLabel);
+		if(parentSlotPanel.formsExist()) {
+			System.out.println("test " + slot.getForm().toString().equals(""));
+			this.add(formLabel);}
 		this.add(levelLabel);
 	}
-	
-	/*
-	Slot slot;
-	JLabel[] labels;
 
-	public SlotPanel(Slot slot) {
-		this.slot = slot;
-		
-		this.labels = new JLabel[3];
+
+	public boolean haveForm() {
+		if(slot != null) {
+			Form f = slot.getForm();
+			return !f.toString().equals("");
+		}
+		return false;
 	}
-	*/
 }

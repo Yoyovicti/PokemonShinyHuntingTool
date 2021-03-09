@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+import data.Game;
+import data.Percentage;
 import data.Slot;
 import data.Zone;
 
@@ -14,9 +16,12 @@ public class PSHZoneFileReader extends PSHFileReaderBasic{
 	private String fileName;
 	private Zone zone;
 	
-	public PSHZoneFileReader(String fileName) {
+	public PSHZoneFileReader(PSHGameFileReader gameFileReader, String fileName) {
+		this.gameFileReader = gameFileReader;
 		this.fileName = fileName;
-		this.zone = new Zone(fileName);
+		
+		Game game = gameFileReader.getGame();
+		this.zone = new Zone(game , fileName);
 		
 		readLines();
 	}
@@ -26,9 +31,11 @@ public class PSHZoneFileReader extends PSHFileReaderBasic{
 			BufferedReader reader = new BufferedReader(new FileReader(fileName));
 			
 			String line;
+			int i = 0;
 			
 			while ((line = reader.readLine()) != null) {
-				addSlot(line);
+				addSlot(line, i);
+				i++;
 			}
 			
 			reader.close();
@@ -38,9 +45,12 @@ public class PSHZoneFileReader extends PSHFileReaderBasic{
 		}
 	}
 
-	private void addSlot(String line) {
+	private void addSlot(String line, int i) {
+		Game zoneGame = zone.getGame();
+		Percentage perc = zoneGame.getPercentage(i);
+		
 		String[] slotTab = line.split(",");
-		Slot slot = new Slot(slotTab);
+		Slot slot = new Slot(slotTab, perc);
 		
 		zone.addSlot(slot);
 		
@@ -49,16 +59,4 @@ public class PSHZoneFileReader extends PSHFileReaderBasic{
 	public Zone getZone() {
 		return zone;
 	}
-	
-	/*
-	public PSHZoneFileReader(String fileName) {
-		super(fileName);
-	}
-
-	@Override
-	protected Slot convertTo(String line) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	*/
 }
