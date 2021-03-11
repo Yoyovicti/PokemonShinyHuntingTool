@@ -1,5 +1,11 @@
 package data;
 
+/**
+ * This class is used to store alternate forms of Pokemon.
+ * 
+ * @author Yoyovicti
+ *
+ */
 public class Form {
 	private Name name;
 	

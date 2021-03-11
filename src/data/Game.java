@@ -1,16 +1,18 @@
 package data;
-import java.io.BufferedReader;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import file.PSHGameFileReader;
 import file.PSHGameListFileReader;
 
+/**
+ * This class implements a game with its parameters : name, list of percentages and list of zones.
+ * It also defines the parameters used to read a game file.
+ * 
+ * @author Yoyovicti
+ *
+ */
 public class Game{
-	
 	public static final String ZONE_PARAM = "Zones";
 	public static final String PERCENTAGE_PARAM = "Slots";
 	
@@ -25,6 +27,11 @@ public class Game{
 		this.zoneList = new ArrayList<Zone>();
 	}
 
+	/**
+	 * Static method used to get the list of available games from a file.
+	 * 
+	 * @return gameList
+	 */
 	public static List<Game> readGames() {
 		try {
 			PSHGameListFileReader gameListFileReader = new PSHGameListFileReader();
