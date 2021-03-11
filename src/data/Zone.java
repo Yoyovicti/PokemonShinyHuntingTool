@@ -34,4 +34,8 @@ public class Zone{
 	public Game getGame() {
 		return this.game;
 	}
+
+	public List<Slot> getSlotList() {
+		return slotList;
+	}
 }

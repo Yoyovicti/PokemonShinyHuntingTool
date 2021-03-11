@@ -44,12 +44,18 @@ public class SlotListPanel extends JPanel {
 	}
 
 	protected void createAndAddSlotPanels() {
-		for (int i = 0; i < 12; i++) {
+		int size = this.getNumberOfSlots();
+		
+		for (int i = 0; i < size; i++) {
 			SlotPanel slotPanel = new SlotPanel(this, i);
 			
 			slotPanelList.add(slotPanel);
 			this.add(slotPanel);
 		}
+	}
+
+	private int getNumberOfSlots() {
+		return parentGeneralSlotPanel.getNumberOfSlots();
 	}
 
 	protected void removeFormLabelsIfExist() {

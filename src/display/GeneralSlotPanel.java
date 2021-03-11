@@ -82,12 +82,22 @@ public class GeneralSlotPanel extends JPanel implements ActionListener{
 
 	public Slot getSlot(int index) {
 		try {
-			Zone currentZoneStr = (Zone) routeOption.getSelectedItem();
-	 		return currentZoneStr.getSlot(index);
+			Zone currentZone = (Zone) routeOption.getSelectedItem();
+	 		return currentZone.getSlot(index);
 	 	} 
 		catch(NullPointerException e) {
 	 		System.err.println("Warning : the current zone is null");
 	 	}
 	 	return null;
+	}
+
+	public int getNumberOfSlots() {
+		Zone currentZone = (Zone) routeOption.getSelectedItem();
+		
+		if(currentZone == null)
+			return 0;
+		
+		List<Slot> slotList = currentZone.getSlotList();
+		return slotList.size();
 	}
 }
