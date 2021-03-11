@@ -1,7 +1,7 @@
 package display;
 
+import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -15,12 +15,22 @@ public class SlotPanel extends JPanel{
 	
 	private SlotListPanel parentSlotPanel;
 	
+	private JLabel percLabel;
 	private JLabel pokemonLabel;
 	private JLabel formLabel;
 	private JLabel levelLabel;
-	private JLabel percLabel;
 	
 	private Slot slot;
+
+	public SlotPanel(String title) {
+		super();
+		String[] titleElems = title.split(",");
+		
+		createLabels(titleElems);
+		
+		setPreferredSizes();
+		addLabels();
+	}
 
 	public SlotPanel(SlotListPanel parent, int index) {
 		super();
@@ -30,43 +40,54 @@ public class SlotPanel extends JPanel{
 		
 		if(slot != null) {
 			Percentage percentage = slot.getPercentage();
-			percLabel = new JLabel(percentage.toString(), JLabel.CENTER);
-			
 			Pokemon pokemon = slot.getPokemon();
-			pokemonLabel = new JLabel(pokemon.toString(),JLabel.CENTER);
-			
 			Form form = slot.getForm();
-			formLabel = new JLabel(form.toString(),JLabel.CENTER);
-			
 			int level = slot.getLevel();
-			levelLabel = new JLabel(Integer.toString(level),JLabel.CENTER);
+			
+			createLabels(
+					percentage.toString(), 
+					pokemon.toString(), 
+					form.toString(), 
+					Integer.toString(level));
 		}
 		else {
-			percLabel = new JLabel("null", JLabel.CENTER);
-			pokemonLabel = new JLabel("null",JLabel.CENTER);
-			formLabel = new JLabel("null",JLabel.CENTER);
-			levelLabel = new JLabel("null",JLabel.CENTER);
+			createLabels("null", "null", "null", "null");
 		}
 		
+		setPreferredSizes();
+		addLabels();
+	}
+
+	public void createLabels(String ...labelStrings) {
+		percLabel = createLabel(labelStrings[0]);
+		pokemonLabel = createLabel(labelStrings[1]);
+		formLabel = createLabel(labelStrings[2]);
+		levelLabel = createLabel(labelStrings[3]);
+	}
+
+	private JLabel createLabel(String name) {
+		return new JLabel(name, JLabel.CENTER);
+	}
+
+	protected void setPreferredSizes() {
 		percLabel.setPreferredSize(new Dimension(100, 40));
 		pokemonLabel.setPreferredSize(new Dimension(100, 40));
 		formLabel.setPreferredSize(new Dimension(100, 40));
 		levelLabel.setPreferredSize(new Dimension(100, 40));
-		
+	}
+	
+	protected void addLabels() {
 		this.add(percLabel);
 		this.add(pokemonLabel);
-		if(parentSlotPanel.formsExist()) {
-			System.out.println("test " + slot.getForm().toString().equals(""));
-			this.add(formLabel);}
+		this.add(formLabel);
 		this.add(levelLabel);
 	}
 
+	public Slot getSlot() {
+		return slot;
+	}
 
-	public boolean haveForm() {
-		if(slot != null) {
-			Form f = slot.getForm();
-			return !f.toString().equals("");
-		}
-		return false;
+	public Component getFormLabel() {
+		return formLabel;
 	}
 }

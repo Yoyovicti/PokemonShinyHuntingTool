@@ -1,33 +1,26 @@
 package display;
 
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.BoxLayout;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import data.Slot;
-import data.Zone;
-import file.PSHFileReader;
-import file.PSHZoneFileReader;
 
 public class SlotListPanel extends JPanel {
 	
 	private GeneralSlotPanel parentGeneralSlotPanel;
 	
 	private List<SlotPanel> slotPanelList;
+	private SlotPanel titlePanel;
 	
 	public SlotListPanel(GeneralSlotPanel parent) {
 		super();
 		this.parentGeneralSlotPanel = parent;
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
+		loadTitle();
 		loadSlotPanelList();
 	}
 
@@ -37,47 +30,61 @@ public class SlotListPanel extends JPanel {
 
 	public void update() {
 		this.removeAll();
+		loadTitle();
 		loadSlotPanelList();
+		
 		this.updateUI();
 	}
 
 	protected void loadSlotPanelList() {
 		this.slotPanelList = new ArrayList<SlotPanel>();
-		loadTitlePanel();
 
+		createAndAddSlotPanels();
+		removeFormLabelsIfExist();
+	}
+
+	protected void createAndAddSlotPanels() {
 		for (int i = 0; i < 12; i++) {
 			SlotPanel slotPanel = new SlotPanel(this, i);
+			
 			slotPanelList.add(slotPanel);
 			this.add(slotPanel);
 		}
 	}
 
-	private void loadTitlePanel() {
-		JPanel titlePanel = new JPanel();
-		
-		JLabel percTitle = new JLabel("Pourcentage",JLabel.CENTER);
-		percTitle.setPreferredSize(new Dimension(100, 40));
-		JLabel pokemonTitle = new JLabel("Pokémon",JLabel.CENTER);
-		pokemonTitle.setPreferredSize(new Dimension(100, 40));
-		JLabel formTitle = new JLabel("Forme",JLabel.CENTER);
-		formTitle.setPreferredSize(new Dimension(100, 40));
-		JLabel levelTitle = new JLabel("Niveau",JLabel.CENTER);
-		levelTitle.setPreferredSize(new Dimension(100, 40));
-		
-		titlePanel.add(percTitle);
-		titlePanel.add(pokemonTitle);
-		if(formsExist())
-			titlePanel.add(formTitle);
-		titlePanel.add(levelTitle);
-		
+	protected void removeFormLabelsIfExist() {
+		if(!formExist()) {
+			removeFormLabels();
+		}
+	}
+
+	private void loadTitle() {
+		titlePanel = new SlotPanel("Pourcentage,Pokémon,Forme,Niveau");
 		this.add(titlePanel);
 	}
 
-	public boolean formsExist() {
-		for(SlotPanel sp : slotPanelList) {
-			if(sp.haveForm())
+	private boolean formExist() {
+		for(int i = 0; i < slotPanelList.size(); i++) {
+			Slot slot = this.getSlot(i);
+			
+			if(slot!= null && slot.hasForm()) {
+				System.out.println(
+						slot.getLevel() + ","  + 
+						slot.getPokemon() + "," + 
+						slot.getPokemon() + "," +
+						slot.getPercentage());
 				return true;
+			}
 		}
 		return false;
+	}
+
+	private void removeFormLabels() {
+		titlePanel.remove(titlePanel.getFormLabel());
+		
+		for(SlotPanel sp : slotPanelList) {
+			sp.remove(sp.getFormLabel());
+		}
+		
 	}
 }

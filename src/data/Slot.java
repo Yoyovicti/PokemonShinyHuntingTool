@@ -1,7 +1,6 @@
 package data;
 
 public class Slot {
-	private Zone parentZone;
 	
 	private Percentage percentage;
 	private Pokemon pokemon;
@@ -33,5 +32,9 @@ public class Slot {
 
 	public Percentage getPercentage() {
 		return percentage;
+	}
+
+	public boolean hasForm() {
+		return form != null && form.toString() != "";
 	}
 }
