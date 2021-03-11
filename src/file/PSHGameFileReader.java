@@ -28,7 +28,8 @@ public class PSHGameFileReader extends PSHFileReaderParam{
 
 	private void readLines(String param) {
 		try {
-			BufferedReader reader = new BufferedReader(new FileReader(fileName));
+			String path = "Game_files/" + fileName;
+			BufferedReader reader = new BufferedReader(new FileReader(path));
 			
 			String line;
 			boolean add = false;

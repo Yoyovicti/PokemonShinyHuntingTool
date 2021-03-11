@@ -28,7 +28,10 @@ public class PSHZoneFileReader extends PSHFileReaderBasic{
 
 	private void readLines() {
 		try {
-			BufferedReader reader = new BufferedReader(new FileReader(fileName));
+			String path = "Game_tables/" + 
+						   gameFileReader.getGame() +  "_tables/" + 
+						   fileName;
+			BufferedReader reader = new BufferedReader(new FileReader(path));
 			
 			String line;
 			int i = 0;
