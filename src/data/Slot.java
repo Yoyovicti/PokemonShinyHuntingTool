@@ -1,7 +1,13 @@
 package data;
 
+/**
+ * The Slot class implements encounter slots, with a percentage, a pokemon, a form and a level.
+ * 
+ * @author Yoyovicti
+ *
+ */
+
 public class Slot {
-	
 	private Percentage percentage;
 	private Pokemon pokemon;
 	private Form form;
@@ -13,6 +19,7 @@ public class Slot {
 			pokemon = new Pokemon(slotTab[0]);
 			form = new Form(slotTab[1]);
 			level = Integer.parseInt(slotTab[2]);
+			
 		} catch (Exception e) {
 			System.err.println("Error : could not create Slot because there are not 3 parameters");
 		}
