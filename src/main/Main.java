@@ -1,5 +1,8 @@
 package main;
 
+import java.util.List;
+
+import data.Pokemon;
 import display.GeneralWindow;
 
 public class Main {
@@ -10,7 +13,7 @@ public class Main {
 	 * @param args (unused)
 	 */
 	public static void main(String[] args) {
-		String version = "0.1.0";
+		String version = "0.1.0dev";
 		
 		new GeneralWindow(version);
 	}

@@ -15,6 +15,11 @@ public class Name {
 		this.nameFR = nameFR;
 	}
 
+	public Name(String fr, String en) {
+		nameFR = fr;
+		nameEN = en;
+	}
+
 	@Override
 	public String toString() {
 		return nameFR;

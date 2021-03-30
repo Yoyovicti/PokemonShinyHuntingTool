@@ -41,16 +41,12 @@ public class Zone{
 		return this.game;
 	}
 
+	public List<Slot> getSlotList() {
+		return slotList;
+	}
+
 	@Override
 	public String toString() {
 		return name.toString();
-	}
-
-	public Game getGame() {
-		return this.game;
-	}
-
-	public List<Slot> getSlotList() {
-		return slotList;
 	}
 }
